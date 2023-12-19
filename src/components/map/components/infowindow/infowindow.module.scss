@@ -1,0 +1,44 @@
+.card {
+  max-height: 200px;
+  width: 250px;
+  text-align: left;
+  padding-top: 12px;
+  overflow: auto;
+}
+
+.featuresList {
+  & tr:nth-child(even) {
+    background-color: rgba(243, 244, 244, 1);
+  }
+  & td {
+    padding: 0.5rem 1rem;
+  }
+}
+
+tr {
+  width: 100%;
+}
+
+:global(.maplibregl-popup-content) {
+  border-radius: 12px;
+  padding: 0;
+}
+
+.title {
+  padding-left: 1rem;
+  text-align: left;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.fieldName {
+  color: rgba(132, 140, 150, 1);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  .listElement {
+    text-align: left;
+  }
+}
