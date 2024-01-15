@@ -1,14 +1,23 @@
 import "./App.css";
-import { Main, MapContainer } from "./components";
+import {
+  // CopyrightSignature,
+  MapContainer,
+  Title,
+} from "./components";
 
 function App() {
   return (
     <>
-      <div className="slide">
+      {/* <div className="slide">
         <Main />
-      </div>
+      </div> */}
       <div className="slide">
+        <div className="panel">
+          <Title />
+        </div>
+
         <MapContainer />
+        {/* <CopyrightSignature /> */}
       </div>
     </>
   );

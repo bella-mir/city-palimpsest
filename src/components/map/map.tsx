@@ -15,7 +15,7 @@ import { layerFillStyle } from "./map-constants";
 
 export const MapContainer = () => {
   const mapRef = useRef<MapRef>(null);
-  const API_KEY: string = "GU4MPQ5iNxp41sph03wQ";
+  // const API_KEY: string = "GU4MPQ5iNxp41sph03wQ";
 
   const [popupInfo, setPopupInfo] = useState<any>(null);
   const [cursor, setCursor] = useState<string>("auto");
@@ -44,7 +44,10 @@ export const MapContainer = () => {
           longitude: 11.5,
           zoom: 10,
         }}
-        mapStyle={`https://api.maptiler.com/maps/1e6f009f-c894-4317-a466-fe522089bc87/style.json?key=${API_KEY}`}
+        // mapStyle={`https://api.maptiler.com/maps/1e6f009f-c894-4317-a466-fe522089bc87/style.json?key=${API_KEY}`}
+        mapStyle={
+          "https://basemaps.cartocdn.com/gl/positron-gl-style/style.json"
+        }
         interactiveLayerIds={["dff"]}
         style={{ width: "100vw", height: "100vh" }}
         ref={mapRef}
@@ -56,10 +59,10 @@ export const MapContainer = () => {
         <Source id="base" type="geojson" data={data as FeatureCollection}>
           <Layer {...layerFillStyle} />
         </Source>
-        {popupInfo && (
+        {popupInfo && infoCoords && (
           <Popup
-            longitude={infoCoords?.lng}
-            latitude={infoCoords?.lat}
+            longitude={infoCoords.lng}
+            latitude={infoCoords.lat}
             onClose={() => setPopupInfo(null)}
             maxWidth={"300px"}
           ></Popup>

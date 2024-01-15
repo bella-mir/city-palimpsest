@@ -1,0 +1,1 @@
+export { CopyrightSignature } from "./copyrightSignature";
