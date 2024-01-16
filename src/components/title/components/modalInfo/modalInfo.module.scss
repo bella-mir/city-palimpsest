@@ -1,3 +1,13 @@
 .modal {
   z-index: 150;
 }
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  .copyright {
+    align-self: flex-end;
+  }
+}

@@ -1,9 +1,23 @@
 .card {
   max-height: 200px;
-  width: 250px;
+  max-width: 500px;
   text-align: left;
-  padding-top: 12px;
+  padding: 12px 0;
   overflow: auto;
+  display: flex;
+  flex-direction: column;
+
+  .button {
+    margin-top: 0.5rem;
+    margin-right: 0.5rem;
+    text-align: right;
+    width: 100px;
+    align-self: flex-end;
+    font-style: italic;
+    font-size: 12px;
+    font-weight: 500;
+    color: #568fa6;
+  }
 }
 
 .featuresList {
@@ -29,6 +43,13 @@ tr {
   text-align: left;
   font-size: 14px;
   font-weight: 600;
+}
+
+.subtitle {
+  padding-left: 1rem;
+  text-align: left;
+  font-size: 12px;
+  font-weight: 400;
 }
 
 .fieldName {
