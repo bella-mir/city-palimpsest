@@ -6,7 +6,7 @@ export const Legend = () => {
   return (
     <div className={classNames(styles.legend, styles.panel)}>
       <span className={styles.title}>Time Periods</span>
-      {Object.keys(LEGEND_COLORS).map((key, index) => (
+      {Object.keys(LEGEND_COLORS).map((key) => (
         <div key={key} className={styles.row}>
           <div
             className={styles.cube}
