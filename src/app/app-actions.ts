@@ -6,3 +6,10 @@ export const setSelectedFeature = createAction(
     payload,
   })
 );
+
+export const setShowInfo = createAction(
+  `appState/setShowInfo`,
+  (payload: any) => ({
+    payload,
+  })
+);

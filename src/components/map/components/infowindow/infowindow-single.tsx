@@ -3,8 +3,11 @@ import styles from "./infowindow.module.scss";
 import { COLUMNS } from "./infowindow-constants";
 import { Button } from "antd";
 import { BulbOutlined } from "@ant-design/icons";
+import { useAppDispatch } from "../../../../app/app-types";
+import { setShowInfo } from "../../../../app/app-actions";
 
 export const InfowindowSingle = ({ popupInfo }: { popupInfo: any }) => {
+  const dispatch = useAppDispatch();
   return (
     <div className={styles.card}>
       <span className={styles.title}>{popupInfo[`Current Name (DE)`]}</span>
@@ -24,7 +27,12 @@ export const InfowindowSingle = ({ popupInfo }: { popupInfo: any }) => {
             })}
         </tbody>
       </table>
-      <Button type="link" size="small" className={styles.button}>
+      <Button
+        type="link"
+        size="small"
+        className={styles.button}
+        onClick={() => dispatch(setShowInfo(true))}
+      >
         Learn more
         <BulbOutlined />
       </Button>

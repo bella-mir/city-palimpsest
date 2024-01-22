@@ -15,7 +15,7 @@ import data from "./data/buildings.json";
 import { layerFillStyle } from "./map-constants";
 import { Infowindow, Legend } from "./components";
 import { useAppDispatch } from "../../app/app-types";
-import { setSelectedFeature } from "../../app/app-actions";
+import { setSelectedFeature, setShowInfo } from "../../app/app-actions";
 
 export const MapContainer = () => {
   const mapRef = useRef<MapRef>(null);
@@ -40,7 +40,6 @@ export const MapContainer = () => {
         return;
       }
       dispatch(setSelectedFeature(feature.properties));
-      console.log(feature.properties);
       setPopupInfo(feature.properties);
       setInfoCoords(event.lngLat);
     },
@@ -50,6 +49,7 @@ export const MapContainer = () => {
   const onClose = useCallback(() => {
     setPopupInfo(null);
     dispatch(setSelectedFeature(undefined));
+    dispatch(setShowInfo(false));
   }, [popupInfo]);
 
   return (

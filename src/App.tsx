@@ -2,6 +2,7 @@ import "./App.css";
 import {
   // CopyrightSignature,
   MapContainer,
+  Navigation,
   Panel,
   Title,
 } from "./components";
@@ -12,6 +13,7 @@ function App() {
       <div className="slide">
         <div className="panel">
           <Title />
+          <Navigation />
           <Panel />
         </div>
         <MapContainer />

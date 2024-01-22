@@ -1,6 +1,6 @@
 export const COLUMNS: { [key: string]: string } = {
-  "Current Name (DE)": "Name (DE)",
-  "Current Name (Eng)": "Name (ENG)",
+  // "Current Name (DE)": "Name (DE)",
+  // "Current Name (Eng)": "Name (ENG)",
   "Previous Name": "Previous Name",
   Address: "Address",
   "Completion year/Opening year": "Completion year/Opening year",

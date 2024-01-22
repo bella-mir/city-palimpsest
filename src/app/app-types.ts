@@ -8,6 +8,8 @@ import { useDispatch } from "react-redux";
 
 export interface IAppState {
   selectedFeature?: any;
+  showInfo?: boolean;
+  layer: "buildings" | "spots" | "parks";
 }
 
 export type TAppState = {

@@ -1,8 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { IAppState } from "./app-types";
-import { setSelectedFeature } from "./app-actions";
+import { setSelectedFeature, setShowInfo } from "./app-actions";
 
-const initialState: IAppState = {};
+const initialState: IAppState = {
+  layer: "buildings",
+};
 
 export const appSlice = createSlice({
   name: "appState",
@@ -12,6 +14,10 @@ export const appSlice = createSlice({
     builder.addCase(setSelectedFeature, (state, action) => ({
       ...state,
       selectedFeature: action.payload,
+    }));
+    builder.addCase(setShowInfo, (state, action) => ({
+      ...state,
+      showInfo: action.payload,
     }));
   },
 });

@@ -10,6 +10,19 @@
   max-height: calc(100vh - 200px);
   overflow: auto;
   box-sizing: border-box;
+  // width: 460px;
+
+  .title {
+    text-align: left;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .subtitle {
+    text-align: left;
+    font-size: 12px;
+    font-weight: 400;
+  }
 
   .block {
     display: flex;
