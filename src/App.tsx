@@ -2,22 +2,19 @@ import "./App.css";
 import {
   // CopyrightSignature,
   MapContainer,
+  Panel,
   Title,
 } from "./components";
 
 function App() {
   return (
     <>
-      {/* <div className="slide">
-        <Main />
-      </div> */}
       <div className="slide">
         <div className="panel">
           <Title />
+          <Panel />
         </div>
-
         <MapContainer />
-        {/* <CopyrightSignature /> */}
       </div>
     </>
   );

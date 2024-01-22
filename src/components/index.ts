@@ -1,4 +1,4 @@
 export { CopyrightSignature } from "./copyrightSignature";
-export { Main } from "./main";
+export { Panel } from "./panel";
 export { MapContainer } from "./map";
 export { Title } from "./title";
