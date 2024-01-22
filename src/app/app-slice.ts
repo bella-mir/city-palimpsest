@@ -1,9 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { IAppState } from "./app-types";
-import { setSelectedFeature, setShowInfo } from "./app-actions";
+import {
+  setSelectedFeature,
+  setShowInfo,
+  setSelectedLayer,
+} from "./app-actions";
 
 const initialState: IAppState = {
-  layer: "buildings",
+  selectedLayer: "buildings",
 };
 
 export const appSlice = createSlice({
@@ -18,6 +22,10 @@ export const appSlice = createSlice({
     builder.addCase(setShowInfo, (state, action) => ({
       ...state,
       showInfo: action.payload,
+    }));
+    builder.addCase(setSelectedLayer, (state, action) => ({
+      ...state,
+      selectedLayer: action.payload,
     }));
   },
 });

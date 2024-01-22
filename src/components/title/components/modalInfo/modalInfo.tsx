@@ -1,5 +1,6 @@
 import Modal from "antd/es/modal/Modal";
 import styles from "./modalInfo.module.scss";
+import { Button } from "antd";
 
 interface IModalInfoProps {
   onClose: () => void;
@@ -15,15 +16,16 @@ export const ModalInfo = ({ onClose }: IModalInfoProps) => {
       width={520}
     >
       <div className={styles.content}>
-        <span>
+        <span className={styles.description}>
           About our project.About our project.About our project.About our
           project.About our project.About our project.About our project.About
           our project.About our project.About our project.About our
           project.About our project.About our project.
         </span>
+        <Button>Help us to add more data</Button>
 
         <span className={styles.copyright}>
-          &copy; Bella Mironova, Joselyn Salinas<br></br> TUM, Cartography M.Sc,
+          Bella Mironova, Joselyn Salinas<br></br>&copy; TUM, Cartography M.Sc,
           2024
         </span>
       </div>

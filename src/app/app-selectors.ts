@@ -12,3 +12,8 @@ export const getIsInfoShown = createSelector(
   getAppState,
   (state) => state.showInfo
 );
+
+export const getSelectedLayer = createSelector(
+  getAppState,
+  (state) => state.selectedLayer
+);

@@ -20,8 +20,12 @@ export const InfowindowSingle = ({ popupInfo }: { popupInfo: any }) => {
             Object.entries(COLUMNS).map(([key, value]) => {
               return (
                 <tr key={key}>
-                  <td className={styles.fieldName}>{value}</td>
-                  <td>{popupInfo[key]}</td>
+                  {popupInfo[key] && (
+                    <>
+                      <td className={styles.fieldName}>{value}</td>
+                      <td>{popupInfo[key]}</td>
+                    </>
+                  )}
                 </tr>
               );
             })}

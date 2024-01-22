@@ -10,8 +10,6 @@ export const Title = () => {
   return (
     <>
       <div className={styles.title}>
-        {/* <img src={logo}></img> */}
-        {/* <div className={styles.divider}></div> */}
         <div className={styles.text}>
           <span>The living past of Munich</span>
           <span className={styles.subtitle}> City as a Palimpsest</span>

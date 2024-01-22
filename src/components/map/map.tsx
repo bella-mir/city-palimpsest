@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useMemo, useRef, useState } from "react";
 import Map, {
   MapRef,
   Source,
@@ -11,17 +11,20 @@ import Map, {
 import "maplibre-gl/dist/maplibre-gl.css";
 import maplibre from "maplibre-gl";
 import { FeatureCollection } from "geojson";
-import data from "./data/buildings.json";
-import { layerFillStyle } from "./map-constants";
+import { LAYERS, clusterCountLayer, clusterLayer } from "./map-constants";
 import { Infowindow, Legend } from "./components";
 import { useAppDispatch } from "../../app/app-types";
 import { setSelectedFeature, setShowInfo } from "../../app/app-actions";
+import { useSelector } from "react-redux";
+import { getSelectedFeature, getSelectedLayer } from "../../app/app-selectors";
 
 export const MapContainer = () => {
   const mapRef = useRef<MapRef>(null);
   const dispatch = useAppDispatch();
+  const selectedLayer = useSelector(getSelectedLayer);
+  const selectedFeature = useSelector(getSelectedFeature);
 
-  const [popupInfo, setPopupInfo] = useState<any>(null);
+  const visibleLayer = useMemo(() => LAYERS[selectedLayer], [selectedLayer]);
   const [cursor, setCursor] = useState<string>("auto");
   const [infoCoords, setInfoCoords] = useState<LngLat | undefined>(undefined);
 
@@ -33,24 +36,19 @@ export const MapContainer = () => {
     { lng: 12, lat: 48.3 },
   ];
 
-  const onClick = useCallback(
-    (event: any) => {
-      const feature = event.features[0];
-      if (!feature) {
-        return;
-      }
-      dispatch(setSelectedFeature(feature.properties));
-      setPopupInfo(feature.properties);
-      setInfoCoords(event.lngLat);
-    },
-    [popupInfo]
-  );
+  const onClick = useCallback((event: any) => {
+    const feature = event.features[0];
+    if (!feature) {
+      return;
+    }
+    dispatch(setSelectedFeature(feature.properties));
+    setInfoCoords(event.lngLat);
+  }, []);
 
   const onClose = useCallback(() => {
-    setPopupInfo(null);
     dispatch(setSelectedFeature(undefined));
     dispatch(setShowInfo(false));
-  }, [popupInfo]);
+  }, []);
 
   return (
     <>
@@ -65,7 +63,7 @@ export const MapContainer = () => {
         mapStyle={
           "https://basemaps.cartocdn.com/gl/positron-gl-style/style.json"
         }
-        interactiveLayerIds={["dff"]}
+        interactiveLayerIds={["buildings", "spots", "parks"]}
         style={{ width: "100vw", height: "100vh" }}
         ref={mapRef}
         onClick={onClick}
@@ -76,19 +74,51 @@ export const MapContainer = () => {
         minZoom={11}
         maxBounds={maxBounds as LngLatBoundsLike}
       >
-        <Source id="base" type="geojson" data={data as FeatureCollection}>
-          <Layer {...layerFillStyle} />
-        </Source>
+        {selectedLayer === "buildings" && (
+          <Source
+            id={"main1"}
+            type="geojson"
+            data={visibleLayer.data as FeatureCollection}
+          >
+            <Layer {...visibleLayer.style} />
+          </Source>
+        )}
+
+        {selectedLayer === "parks" && (
+          <Source
+            id={"main2"}
+            type="geojson"
+            data={visibleLayer.data as FeatureCollection}
+          >
+            <Layer {...visibleLayer.style} />
+          </Source>
+        )}
+
+        {selectedLayer === "spots" && (
+          <Source
+            id="spots"
+            type="geojson"
+            data={visibleLayer.data as FeatureCollection}
+            cluster={true}
+            clusterMaxZoom={10}
+            clusterRadius={50}
+          >
+            <Layer {...clusterLayer} />
+            <Layer {...clusterCountLayer} />
+            <Layer {...visibleLayer.style} />
+          </Source>
+        )}
+
         <Legend />
         <ScaleControl position="bottom-right" />
-        {popupInfo && infoCoords && (
+        {selectedFeature && infoCoords && (
           <Popup
             longitude={infoCoords.lng}
             latitude={infoCoords.lat}
             onClose={() => onClose()}
             maxWidth={"300px"}
           >
-            <Infowindow popupInfo={popupInfo} />
+            <Infowindow popupInfo={selectedFeature} />
           </Popup>
         )}
       </Map>

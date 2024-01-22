@@ -1,11 +1,14 @@
 import { LayerProps } from "react-map-gl";
+import buildings from "./data/buildings.json";
+import parks from "./data/parks.json";
+import spots from "./data/spots.json";
 
-export const layerFillStyle: LayerProps = {
-  id: "dff",
+export const buildingsFillStyle: LayerProps = {
+  id: "buildings",
   type: "fill",
   paint: {
     "fill-color": {
-      property: "Period", // this will be your density property form you geojson
+      property: "Period",
       stops: [
         [1, "#d99e32ff"],
         [2, "#f27649ff"],
@@ -17,4 +20,76 @@ export const layerFillStyle: LayerProps = {
       ],
     },
   },
+};
+
+export const parksFillStyle: LayerProps = {
+  id: "parks",
+  type: "fill",
+  paint: {
+    "fill-color": {
+      property: "Period",
+      stops: [
+        [1, "#d99e32ff"],
+        [2, "#f27649ff"],
+        [3, "#668c54ff"],
+        [4, "#bfba73ff"],
+        [5, "#312640ff"],
+        [6, "#8c7d4fff"],
+        [7, "#568fa6ff"],
+      ],
+    },
+  },
+};
+
+export const spotsStyle: LayerProps = {
+  id: "spots",
+  type: "circle",
+  source: "spots",
+  filter: ["!", ["has", "point_count"]],
+  paint: {
+    "circle-color": {
+      property: "Period",
+      stops: [
+        [1, "#d99e32ff"],
+        [2, "#f27649ff"],
+        [3, "#668c54ff"],
+        [4, "#bfba73ff"],
+        [5, "#312640ff"],
+        [6, "#8c7d4fff"],
+        [7, "#568fa6ff"],
+      ],
+    },
+    "circle-radius": 7,
+    "circle-stroke-width": 1,
+    "circle-stroke-color": "white",
+  },
+};
+
+export const clusterCountLayer: LayerProps = {
+  id: "cluster-count",
+  type: "symbol",
+  source: "spots",
+  filter: ["has", "point_count"],
+  layout: {
+    "text-field": "{point_count_abbreviated}",
+    "text-font": ["DIN Offc Pro Medium", "Arial Unicode MS Bold"],
+    "text-size": 12,
+  },
+};
+
+export const clusterLayer: LayerProps = {
+  id: "clusters",
+  type: "circle",
+  source: "spots",
+  filter: ["has", "point_count"],
+  paint: {
+    "circle-color": "#F08332",
+    "circle-radius": ["step", ["get", "point_count"], 20, 100, 30, 750, 40],
+  },
+};
+
+export const LAYERS: any = {
+  buildings: { data: buildings, style: buildingsFillStyle },
+  spots: { data: spots, style: spotsStyle },
+  parks: { data: parks, style: parksFillStyle },
 };
