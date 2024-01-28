@@ -11,9 +11,12 @@ export const InfowindowSingle = ({ popupInfo }: { popupInfo: any }) => {
   return (
     <div className={styles.card}>
       <span className={styles.title}>{popupInfo[`Current Name (DE)`]}</span>
-      <span className={styles.subtitle}>
-        ({popupInfo[`Current Name (Eng)`]})
-      </span>
+      {popupInfo[`Current Name (Eng)`] && (
+        <span className={styles.subtitle}>
+          ({popupInfo[`Current Name (Eng)`]})
+        </span>
+      )}
+
       <table>
         <tbody className={styles.featuresList}>
           {popupInfo &&

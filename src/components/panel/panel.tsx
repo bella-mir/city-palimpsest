@@ -1,5 +1,4 @@
 import "maplibre-gl/dist/maplibre-gl.css";
-// import { Link } from "react-router-dom";
 import styles from "./panel.module.scss";
 import { useSelector } from "react-redux";
 import { getIsInfoShown, getSelectedFeature } from "../../app/app-selectors";
@@ -20,10 +19,24 @@ export const Panel = () => {
         <span className={styles.title}>
           {`${selectedFeature[`Current Name (DE)`]} `}
         </span>
-        <span className={styles.subtitle}>
-          ({`${selectedFeature[`Current Name (Eng)`]} `})
-        </span>
+        {selectedFeature[`Current Name (Eng)`] && (
+          <span className={styles.subtitle}>
+            ({`${selectedFeature[`Current Name (Eng)`]} `})
+          </span>
+        )}
       </div>
+      {selectedFeature["picture"] && (
+        <div className={styles.pictureBlock}>
+          <img
+            src={selectedFeature["picture"]}
+            className={styles.picture}
+          ></img>
+          <span className={styles.source}>
+            Picture source: {selectedFeature["pic_source"]}
+          </span>
+        </div>
+      )}
+
       {Object.keys(COLUMNS).map((key) => (
         <>
           {selectedFeature[key] && (

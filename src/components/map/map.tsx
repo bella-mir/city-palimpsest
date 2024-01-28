@@ -41,6 +41,7 @@ export const MapContainer = () => {
     if (!feature) {
       return;
     }
+    console.log(feature.properties);
     dispatch(setSelectedFeature(feature.properties));
     setInfoCoords(event.lngLat);
   }, []);
