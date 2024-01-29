@@ -1,24 +1,28 @@
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import {
-  // CopyrightSignature,
-  MapContainer,
-  Navigation,
-  Panel,
-  Title,
-} from "./components";
+import { MapContainer, Navigation, Panel, Title } from "./components";
+import { FormPage } from "./components/form";
 
 function App() {
   return (
-    <>
-      <div className="slide">
-        <div className="panel">
-          <Title />
-          <Navigation />
-          <Panel />
-        </div>
-        <MapContainer />
-      </div>
-    </>
+    <Routes>
+      <Route
+        path="/city-palimpsest/"
+        element={
+          <>
+            <div className="slide">
+              <div className="panel">
+                <Title />
+                <Navigation />
+                <Panel />
+              </div>
+              <MapContainer />
+            </div>
+          </>
+        }
+      />
+      <Route path="/city-palimpsest/feedback" element={<FormPage />} />
+    </Routes>
   );
 }
 

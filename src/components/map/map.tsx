@@ -7,11 +7,17 @@ import Map, {
   Popup,
   ScaleControl,
   LngLatBoundsLike,
+  GeoJSONSource,
 } from "react-map-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import maplibre from "maplibre-gl";
 import { FeatureCollection } from "geojson";
-import { LAYERS, clusterCountLayer, clusterLayer } from "./map-constants";
+import {
+  LAYERS,
+  clusterCountLayer,
+  clusterLayer,
+  parksOutline,
+} from "./map-constants";
 import { Infowindow, Legend } from "./components";
 import { useAppDispatch } from "../../app/app-types";
 import { setSelectedFeature, setShowInfo } from "../../app/app-actions";
@@ -41,7 +47,24 @@ export const MapContainer = () => {
     if (!feature) {
       return;
     }
-    console.log(feature.properties);
+
+    const clusterId = feature.properties.cluster_id;
+
+    if (clusterId) {
+      const mapboxSource = mapRef?.current?.getSource("spots") as GeoJSONSource;
+      mapboxSource.getClusterExpansionZoom(clusterId, (err, zoom) => {
+        if (err) {
+          return;
+        }
+
+        mapRef?.current?.easeTo({
+          center: feature.geometry.coordinates,
+          zoom,
+          duration: 500,
+        });
+      });
+    }
+
     dispatch(setSelectedFeature(feature.properties));
     setInfoCoords(event.lngLat);
   }, []);
@@ -64,7 +87,7 @@ export const MapContainer = () => {
         mapStyle={
           "https://basemaps.cartocdn.com/gl/positron-gl-style/style.json"
         }
-        interactiveLayerIds={["buildings", "spots", "parks"]}
+        interactiveLayerIds={["buildings", "spots2", "parks"]}
         style={{ width: "100vw", height: "100vh" }}
         ref={mapRef}
         onClick={onClick}
@@ -86,13 +109,22 @@ export const MapContainer = () => {
         )}
 
         {selectedLayer === "parks" && (
-          <Source
-            id={"main2"}
-            type="geojson"
-            data={visibleLayer.data as FeatureCollection}
-          >
-            <Layer {...visibleLayer.style} />
-          </Source>
+          <>
+            <Source
+              id={"main2"}
+              type="geojson"
+              data={visibleLayer.data as FeatureCollection}
+            >
+              <Layer {...visibleLayer.style} />
+            </Source>
+            <Source
+              id={"submain"}
+              type="geojson"
+              data={visibleLayer.data as FeatureCollection}
+            >
+              <Layer {...parksOutline} />
+            </Source>
+          </>
         )}
 
         {selectedLayer === "spots" && (
@@ -100,13 +132,13 @@ export const MapContainer = () => {
             id="spots"
             type="geojson"
             data={visibleLayer.data as FeatureCollection}
-            cluster={true}
-            clusterMaxZoom={10}
-            clusterRadius={50}
+            // cluster={true}
+            // // clusterMaxZoom={13}
+            // // clusterRadius={200}
           >
+            <Layer {...visibleLayer.style} />
             <Layer {...clusterLayer} />
             <Layer {...clusterCountLayer} />
-            <Layer {...visibleLayer.style} />
           </Source>
         )}
 

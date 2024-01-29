@@ -38,11 +38,57 @@ export const parksFillStyle: LayerProps = {
         [7, "#568fa6ff"],
       ],
     },
+    // "fill-color": [
+    //   "match",
+    //   ["get", "Type_2"],
+    //   "square",
+    //   "#964B00",
+    //   "park",
+    //   "green",
+    //   "garden",
+    //   "green",
+    //   "cemetry",
+    //   "green",
+    //   /* other */ "#BEB15A",
+    // ],
+    "fill-opacity": 0.5,
+  },
+};
+export const parksOutline: LayerProps = {
+  id: "parksOutline",
+  type: "line",
+  paint: {
+    "line-color": [
+      "match",
+      ["get", "Type_2"],
+      "square",
+      "#964B00",
+      "park",
+      "green",
+      "garden",
+      "green",
+      "cemetry",
+      "green",
+      /* other */ "#BEB15A",
+    ],
+    // "line-color": {
+    //   property: "Period",
+    //   stops: [
+    //     [1, "#d99e32ff"],
+    //     [2, "#f27649ff"],
+    //     [3, "#668c54ff"],
+    //     [4, "#bfba73ff"],
+    //     [5, "#312640ff"],
+    //     [6, "#8c7d4fff"],
+    //     [7, "#568fa6ff"],
+    //   ],
+    // },
+    // "line-width": 3,
   },
 };
 
 export const spotsStyle: LayerProps = {
-  id: "spots",
+  id: "spots2",
   type: "circle",
   source: "spots",
   filter: ["!", ["has", "point_count"]],
