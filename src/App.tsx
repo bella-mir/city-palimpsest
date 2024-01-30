@@ -1,7 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import { MapContainer, Navigation, Panel, Title } from "./components";
-import { FormPage } from "./components/form";
 
 function App() {
   return (
@@ -21,7 +20,6 @@ function App() {
           </>
         }
       />
-      <Route path="/city-palimpsest/feedback" element={<FormPage />} />
     </Routes>
   );
 }

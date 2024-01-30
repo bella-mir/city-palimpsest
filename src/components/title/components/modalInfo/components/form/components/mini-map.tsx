@@ -57,6 +57,7 @@ export const MiniMap = () => {
     <>
       <Map
         attributionControl={false}
+        // @ts-ignore
         mapLib={maplibregl}
         initialViewState={{
           latitude: 48.14,

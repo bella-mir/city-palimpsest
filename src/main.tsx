@@ -14,7 +14,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         theme={{
           token: {
             fontFamily: "Geometria",
-            colorPrimary: "#392D59",
+            colorPrimary: "#568FA6",
             colorLink: "#568fa6",
           },
         }}
