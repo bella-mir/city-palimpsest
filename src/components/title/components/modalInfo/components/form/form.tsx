@@ -16,12 +16,12 @@ import { useState } from "react";
 import { RollbackOutlined } from "@ant-design/icons";
 
 interface IFormProps {
-  setMode: (value: "info" | "feedback") => void;
+  setMode?: (value: "info" | "feedback") => void;
 }
 
 export const FormModule = ({ setMode }: IFormProps) => {
   const [form] = Form.useForm();
-  const [formMode, setFromMode] = useState<"data" | "feedback">("data");
+  const [formMode, setFromMode] = useState<"data" | "feedback">("feedback");
 
   const success = () => {
     Modal.success({
@@ -42,16 +42,16 @@ export const FormModule = ({ setMode }: IFormProps) => {
     <>
       <FormContext.Provider value={{ coordinates, setCoordinates }}>
         <Radio.Group
-          defaultValue="data"
+          defaultValue="feedback"
           className={styles.radioGroup}
           onChange={(e: RadioChangeEvent) => setFromMode(e.target.value)}
           size={"small"}
         >
-          <Radio.Button value="data" className={styles.radioButton}>
-            Add Data
-          </Radio.Button>
           <Radio.Button value="feedback" className={styles.radioButton}>
             Give feedback
+          </Radio.Button>
+          <Radio.Button value="data" className={styles.radioButton}>
+            Add Data
           </Radio.Button>
         </Radio.Group>
         <div className={styles.content}>
@@ -166,7 +166,7 @@ export const FormModule = ({ setMode }: IFormProps) => {
           <Button
             type="link"
             className={styles.linkBack}
-            onClick={() => setMode("info")}
+            onClick={() => setMode && setMode("info")}
           >
             Back to Project Description <RollbackOutlined />
           </Button>

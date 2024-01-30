@@ -1,1 +1,1 @@
-export { ModalInfo } from "./modalInfo";
+export { ModalInfo, ModalData } from "./modalInfo";

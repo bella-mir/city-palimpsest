@@ -8,6 +8,9 @@ export const COLUMNS: { [key: string]: string } = {
   Description: "Description",
   "Owner/Initiator/Commisioned by": "Owner/Initiator/Commisioned by",
   "Architect/Artist/Author": "Architect(s)",
+};
+
+export const WEBSITES: { [key: string]: string } = {
   Website: "Website",
   "Wikipedia page": "Wikipedia",
   "Muenchen.de": "Muenchen.de",

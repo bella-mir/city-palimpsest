@@ -2,7 +2,7 @@ import "maplibre-gl/dist/maplibre-gl.css";
 import styles from "./panel.module.scss";
 import { useSelector } from "react-redux";
 import { getIsInfoShown, getSelectedFeature } from "../../app/app-selectors";
-import { COLUMNS } from "./panel-constants";
+import { COLUMNS, WEBSITES } from "./panel-constants";
 import { isValidURL } from "../../utils";
 
 export const Panel = () => {
@@ -60,6 +60,32 @@ export const Panel = () => {
           )}
         </>
       ))}
+      <div className={styles.block}>
+        <span className={styles.value}>More Information:</span>
+        {Object.keys(WEBSITES).map((key) => (
+          <>
+            {selectedFeature[key] && (
+              <>
+                {isValidURL(selectedFeature[key]) ? (
+                  <a
+                    href={selectedFeature[key]}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.key}
+                  >
+                    {WEBSITES[key]}
+                  </a>
+                ) : (
+                  <>
+                    <span className={styles.value}>{WEBSITES[key]}</span>
+                    <span className={styles.key}>{selectedFeature[key]}</span>
+                  </>
+                )}
+              </>
+            )}
+          </>
+        ))}
+      </div>
     </div>
   );
 };
