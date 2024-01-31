@@ -18,7 +18,8 @@ export const ModalData = ({ onClose }: IModalInfoProps) => {
   });
   const success = () => {
     Modal.success({
-      content: "Thank you for your work! You will see your data on a map soon!",
+      content:
+        "Thank you for your work! You will see your data on the map soon!",
     });
     form.resetFields();
   };

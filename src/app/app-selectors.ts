@@ -17,3 +17,5 @@ export const getSelectedLayer = createSelector(
   getAppState,
   (state) => state.selectedLayer
 );
+
+export const getFilter = createSelector(getAppState, (state) => state.filter);

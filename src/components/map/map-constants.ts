@@ -51,7 +51,7 @@ export const parksFillStyle: LayerProps = {
     //   "green",
     //   /* other */ "#BEB15A",
     // ],
-    "fill-opacity": 0.8,
+    "fill-opacity": 0.9,
   },
 };
 export const parksOutline: LayerProps = {

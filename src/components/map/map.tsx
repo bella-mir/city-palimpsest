@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Map, {
   MapRef,
   Source,
@@ -22,7 +22,11 @@ import { Infowindow, Legend } from "./components";
 import { useAppDispatch } from "../../app/app-types";
 import { setSelectedFeature, setShowInfo } from "../../app/app-actions";
 import { useSelector } from "react-redux";
-import { getSelectedFeature, getSelectedLayer } from "../../app/app-selectors";
+import {
+  getFilter,
+  getSelectedFeature,
+  getSelectedLayer,
+} from "../../app/app-selectors";
 import styles from "./map.module.scss";
 
 export const MapContainer = () => {
@@ -30,11 +34,13 @@ export const MapContainer = () => {
   const dispatch = useAppDispatch();
   const selectedLayer = useSelector(getSelectedLayer);
   const selectedFeature = useSelector(getSelectedFeature);
+  const filterSet = useSelector(getFilter);
 
   const visibleLayer = useMemo(() => LAYERS[selectedLayer], [selectedLayer]);
   const [cursor, setCursor] = useState<string>("auto");
   const [infoCoords, setInfoCoords] = useState<LngLat | undefined>(undefined);
   const [hoverInfo, setHoverInfo] = useState<any>(null);
+  const [filter, setfilter] = useState<any>([">", "Period", 0]);
 
   const onMouseEnter = useCallback(() => setCursor("pointer"), []);
   const onMouseLeave = useCallback(() => setCursor("auto"), []);
@@ -82,6 +88,15 @@ export const MapContainer = () => {
     dispatch(setShowInfo(false));
   }, []);
 
+  useEffect(() => {
+    if (filterSet === "all") {
+      setfilter(undefined);
+    } else {
+      const filterQuery = ["==", "Period", filterSet];
+      setfilter(filterQuery);
+    }
+  }, [filterSet]);
+
   return (
     <>
       <Map
@@ -113,7 +128,10 @@ export const MapContainer = () => {
             type="geojson"
             data={visibleLayer.data as FeatureCollection}
           >
-            <Layer {...visibleLayer.style} />
+            <Layer
+              {...visibleLayer.style}
+              filter={filter ? filter : [">", "Period", 0]}
+            />
           </Source>
         )}
 
@@ -124,14 +142,14 @@ export const MapContainer = () => {
               type="geojson"
               data={visibleLayer.data as FeatureCollection}
             >
-              <Layer {...visibleLayer.style} />
-            </Source>
-            <Source
-              id={"submain"}
-              type="geojson"
-              data={visibleLayer.data as FeatureCollection}
-            >
-              <Layer {...parksOutline} />
+              <Layer
+                {...visibleLayer.style}
+                filter={filter ? filter : [">", "Period", 0]}
+              />
+              <Layer
+                {...parksOutline}
+                filter={filter ? filter : [">", "Period", 0]}
+              />
             </Source>
           </>
         )}
@@ -141,11 +159,11 @@ export const MapContainer = () => {
             id="spots"
             type="geojson"
             data={visibleLayer.data as FeatureCollection}
-            // cluster={true}
-            // // clusterMaxZoom={13}
-            // // clusterRadius={200}
           >
-            <Layer {...visibleLayer.style} />
+            <Layer
+              {...visibleLayer.style}
+              filter={filter ? filter : [">", "Period", 0]}
+            />
             <Layer {...clusterLayer} />
             <Layer {...clusterCountLayer} />
           </Source>

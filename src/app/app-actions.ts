@@ -29,3 +29,10 @@ export const setNewSelectedLayer =
     dispatch(setShowInfo(false));
     dispatch(setSelectedLayer(payload));
   };
+
+export const setFilter = createAction(
+  `appState/setFilter`,
+  (payload: "all" | 1 | 2 | 3 | 4 | 5 | 6 | 7) => ({
+    payload,
+  })
+);

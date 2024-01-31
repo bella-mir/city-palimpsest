@@ -4,10 +4,12 @@ import {
   setSelectedFeature,
   setShowInfo,
   setSelectedLayer,
+  setFilter,
 } from "./app-actions";
 
 const initialState: IAppState = {
   selectedLayer: "buildings",
+  filter: "all",
 };
 
 export const appSlice = createSlice({
@@ -26,6 +28,10 @@ export const appSlice = createSlice({
     builder.addCase(setSelectedLayer, (state, action) => ({
       ...state,
       selectedLayer: action.payload,
+    }));
+    builder.addCase(setFilter, (state, action) => ({
+      ...state,
+      filter: action.payload,
     }));
   },
 });

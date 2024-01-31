@@ -5,6 +5,7 @@
   position: absolute;
   top: 1rem;
   right: 1rem;
+  font-family: Geometria;
 }
 
 .legend {
@@ -34,4 +35,16 @@
       border: 1px solid;
     }
   }
+
+  .selector {
+    font-size: 12px;
+    padding: 0;
+
+    &:global(.ant-select-selector) {
+      padding: 0;
+    }
+  }
+}
+:global(.ant-select-selection-item) {
+  font-size: 12px;
 }
