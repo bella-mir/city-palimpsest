@@ -6,6 +6,7 @@
   top: 1rem;
   right: 1rem;
   font-family: Geometria;
+  color: gray;
 }
 
 .legend {
@@ -39,6 +40,7 @@
   .selector {
     font-size: 12px;
     padding: 0;
+    margin-left: -3px;
 
     &:global(.ant-select-selector) {
       padding: 0;
@@ -47,4 +49,9 @@
 }
 :global(.ant-select-selection-item) {
   font-size: 12px;
+}
+
+.selected {
+  font-weight: 500;
+  color: black;
 }
