@@ -163,30 +163,19 @@ export const MapContainer = () => {
             <Infowindow popupInfo={selectedFeature} />
           </Popup>
         )}
-        {
-          hoverInfo && hoverInfo.lng && hoverInfo.lat && !selectedFeature && (
-            <Popup
-              longitude={hoverInfo.lng}
-              latitude={hoverInfo.lat}
-              maxWidth="300px"
-              closeButton={false}
-              anchor="left"
-            >
-              <div className={styles.hoverInfo}>
-                {hoverInfo.feature.properties["Current Name (DE)"]}
-              </div>
-            </Popup>
-          )
-
-          // (
-          //   <div
-          //     className="tooltip"
-          //     style={{ left: hoverInfo.x, top: hoverInfo.y }}
-          //   >
-          //
-          //   </div>
-          // )
-        }
+        {hoverInfo && hoverInfo.lng && hoverInfo.lat && !selectedFeature && (
+          <Popup
+            longitude={hoverInfo.lng}
+            latitude={hoverInfo.lat}
+            maxWidth="300px"
+            closeButton={false}
+            anchor="left"
+          >
+            <div className={styles.hoverInfo}>
+              {hoverInfo.feature.properties["Current Name (DE)"]}
+            </div>
+          </Popup>
+        )}
       </Map>
     </>
   );
