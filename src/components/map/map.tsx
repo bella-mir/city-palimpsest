@@ -23,6 +23,7 @@ import { useAppDispatch } from "../../app/app-types";
 import { setSelectedFeature, setShowInfo } from "../../app/app-actions";
 import { useSelector } from "react-redux";
 import { getSelectedFeature, getSelectedLayer } from "../../app/app-selectors";
+import styles from "./map.module.scss";
 
 export const MapContainer = () => {
   const mapRef = useRef<MapRef>(null);
@@ -33,6 +34,7 @@ export const MapContainer = () => {
   const visibleLayer = useMemo(() => LAYERS[selectedLayer], [selectedLayer]);
   const [cursor, setCursor] = useState<string>("auto");
   const [infoCoords, setInfoCoords] = useState<LngLat | undefined>(undefined);
+  const [hoverInfo, setHoverInfo] = useState<any>(null);
 
   const onMouseEnter = useCallback(() => setCursor("pointer"), []);
   const onMouseLeave = useCallback(() => setCursor("auto"), []);
@@ -69,6 +71,12 @@ export const MapContainer = () => {
     setInfoCoords(event.lngLat);
   }, []);
 
+  const onHover = useCallback((event: any) => {
+    const { features, lngLat } = event;
+    const hoveredFeature = features && features[0];
+    setHoverInfo(hoveredFeature && { feature: hoveredFeature, ...lngLat });
+  }, []);
+
   const onClose = useCallback(() => {
     dispatch(setSelectedFeature(undefined));
     dispatch(setShowInfo(false));
@@ -97,6 +105,7 @@ export const MapContainer = () => {
         maxZoom={17}
         minZoom={11}
         maxBounds={maxBounds as LngLatBoundsLike}
+        onMouseMove={onHover}
       >
         {selectedLayer === "buildings" && (
           <Source
@@ -154,6 +163,30 @@ export const MapContainer = () => {
             <Infowindow popupInfo={selectedFeature} />
           </Popup>
         )}
+        {
+          hoverInfo && hoverInfo.lng && hoverInfo.lat && !selectedFeature && (
+            <Popup
+              longitude={hoverInfo.lng}
+              latitude={hoverInfo.lat}
+              maxWidth="300px"
+              closeButton={false}
+              anchor="left"
+            >
+              <div className={styles.hoverInfo}>
+                {hoverInfo.feature.properties["Current Name (DE)"]}
+              </div>
+            </Popup>
+          )
+
+          // (
+          //   <div
+          //     className="tooltip"
+          //     style={{ left: hoverInfo.x, top: hoverInfo.y }}
+          //   >
+          //
+          //   </div>
+          // )
+        }
       </Map>
     </>
   );
