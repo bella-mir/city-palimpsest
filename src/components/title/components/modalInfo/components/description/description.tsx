@@ -107,6 +107,14 @@ export const Description = ({ setMode }: IDescriptionProps) => {
                   Wikimapia
                 </a>
               </li>
+              <li>
+                <a
+                  href="https://storymaps.arcgis.com/stories/43f129d10a01478f85b5b358c691b8b1"
+                  target="_blank"
+                >
+                  A Tale of the City (Milana Glebova, Olesya Ignatyeva)
+                </a>
+              </li>
             </ol>
           </span>
         </div>
