@@ -134,6 +134,15 @@ export const clusterLayer: LayerProps = {
   },
 };
 
+export const adminFillStyle: LayerProps = {
+  id: "admin",
+  type: "fill",
+  paint: {
+    "fill-color": "rgba(255,255,255,0.6)",
+    "fill-outline-color": "#8585AD",
+  },
+};
+
 export const LAYERS: any = {
   buildings: { data: buildings, style: buildingsFillStyle },
   spots: { data: spots, style: spotsStyle },

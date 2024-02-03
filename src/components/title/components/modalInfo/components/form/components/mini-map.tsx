@@ -44,15 +44,6 @@ export const MiniMap = () => {
     { lng: 12, lat: 48.3 },
   ];
 
-  // const layerFillStyle: LayerProps = {
-  //   id: "dff",
-  //   type: "fill",
-  //   paint: {
-  //     "fill-color": "rgba(255,255,255,0.6)",
-  //     "fill-outline-color": "#8585AD",
-  //   },
-  // };
-
   return (
     <>
       <Map
@@ -74,9 +65,6 @@ export const MiniMap = () => {
         style={{ height: "100%", minHeight: "300px" }}
       >
         <NavigationControl position="bottom-left" showCompass={false} />
-        {/* <Source id="base" type="geojson" data={border as FeatureCollection}>
-          <Layer {...layerFillStyle} />
-        </Source> */}
         <Marker
           longitude={marker.longitude}
           latitude={marker.latitude}

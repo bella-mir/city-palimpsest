@@ -14,6 +14,7 @@ import maplibre from "maplibre-gl";
 import { FeatureCollection } from "geojson";
 import {
   LAYERS,
+  adminFillStyle,
   clusterCountLayer,
   clusterLayer,
   parksOutline,
@@ -27,6 +28,7 @@ import {
   getSelectedFeature,
   getSelectedLayer,
 } from "../../app/app-selectors";
+import admin from "./data/munich_admin.json";
 import styles from "./map.module.scss";
 
 export const MapContainer = () => {
@@ -168,6 +170,9 @@ export const MapContainer = () => {
             <Layer {...clusterCountLayer} />
           </Source>
         )}
+        <Source id="admin" type="geojson" data={admin as FeatureCollection}>
+          <Layer {...adminFillStyle} />
+        </Source>
 
         <Legend />
         <ScaleControl position="bottom-right" />
