@@ -17,7 +17,7 @@ import {
   adminFillStyle,
   clusterCountLayer,
   clusterLayer,
-  parksOutline,
+  // parksOutline,
 } from "./map-constants";
 import { Infowindow, Legend } from "./components";
 import { useAppDispatch } from "../../app/app-types";
@@ -28,7 +28,7 @@ import {
   getSelectedFeature,
   getSelectedLayer,
 } from "../../app/app-selectors";
-import admin from "./data/munich_admin.json";
+import admin from "../../data/munich_admin.json";
 import styles from "./map.module.scss";
 
 export const MapContainer = () => {
@@ -148,10 +148,10 @@ export const MapContainer = () => {
                 {...visibleLayer.style}
                 filter={filter ? filter : [">", "Period", 0]}
               />
-              <Layer
+              {/* <Layer
                 {...parksOutline}
                 filter={filter ? filter : [">", "Period", 0]}
-              />
+              /> */}
             </Source>
           </>
         )}

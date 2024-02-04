@@ -1,7 +1,7 @@
 import { LayerProps } from "react-map-gl";
-import buildings from "./data/buildings.json";
-import parks from "./data/parks.json";
-import spots from "./data/spots.json";
+import buildings from "../../data/buildings.json";
+import parks from "../../data/parks.json";
+import spots from "../../data/spots.json";
 
 export const buildingsFillStyle: LayerProps = {
   id: "buildings",

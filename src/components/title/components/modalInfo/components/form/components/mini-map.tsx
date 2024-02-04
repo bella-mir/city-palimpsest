@@ -1,14 +1,19 @@
 import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import {
+  Layer,
+  LayerProps,
   LngLatBoundsLike,
   Map,
   Marker,
   MarkerDragEvent,
   NavigationControl,
+  Source,
 } from "react-map-gl";
+import { FeatureCollection } from "geojson";
 import maplibregl from "maplibre-gl";
 import Pin from "./pin";
 import { FormContext } from "../formContext";
+import admin from "../../../../../../../data/munich_admin.json";
 
 export const MiniMap = () => {
   const { setCoordinates, coordinates } = useContext(FormContext);
@@ -44,6 +49,15 @@ export const MiniMap = () => {
     { lng: 12, lat: 48.3 },
   ];
 
+  const adminFillStyle: LayerProps = {
+    id: "admin",
+    type: "fill",
+    paint: {
+      "fill-color": "rgba(255,255,255,0.6)",
+      "fill-outline-color": "#8585AD",
+    },
+  };
+
   return (
     <>
       <Map
@@ -64,6 +78,9 @@ export const MiniMap = () => {
         maxBounds={maxBounds as LngLatBoundsLike}
         style={{ height: "100%", minHeight: "300px" }}
       >
+        <Source id="admin" type="geojson" data={admin as FeatureCollection}>
+          <Layer {...adminFillStyle} />
+        </Source>
         <NavigationControl position="bottom-left" showCompass={false} />
         <Marker
           longitude={marker.longitude}
