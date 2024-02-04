@@ -47,6 +47,7 @@ export const Description = ({ setMode }: IDescriptionProps) => {
             Feedback Form
           </Button>
         </div>
+
         <div className={styles.block}>
           <span className={styles.subtitle}>References</span>
           <span className={styles.description}>
