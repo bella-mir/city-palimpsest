@@ -4,12 +4,15 @@ import { CATEGORIES } from "./components/form/form-constants";
 import { FormContext } from "./components/form/formContext";
 import styles from "./modalInfo.module.scss";
 import { Button, Form, Input, InputNumber, Modal, Select } from "antd";
+import { useAppDispatch } from "../../../../app/app-types";
+import { postIdea } from "../../../../app/app-actions";
 
 interface IModalInfoProps {
   onClose: () => void;
 }
 
 export const ModalData = ({ onClose }: IModalInfoProps) => {
+  const dispatch = useAppDispatch();
   const [form] = Form.useForm();
 
   const [coordinates, setCoordinates] = useState<{ lng: number; lat: number }>({
@@ -24,9 +27,11 @@ export const ModalData = ({ onClose }: IModalInfoProps) => {
     form.resetFields();
   };
 
-  const onFinish = () => {
-    success();
+  const onFinish = (values: any) => {
+    console.log("finish");
+    dispatch(postIdea({ ...values, coordinates })).then(() => success());
   };
+
   return (
     <Modal
       open={true}
@@ -66,11 +71,11 @@ export const ModalData = ({ onClose }: IModalInfoProps) => {
                 style={{ margin: 0, fontSize: 12 }}
               >
                 <MiniMap />
-                <p className={styles.note}>
-                  Drag marker to select location of the
-                  builiding/spot/square/park or something else
-                </p>
               </Form.Item>
+              <p className={styles.note}>
+                Drag marker to select location of the builiding/spot/square/park
+                or something else
+              </p>
 
               <Form.Item
                 name="name"

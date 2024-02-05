@@ -19,3 +19,12 @@ export const getSelectedLayer = createSelector(
 );
 
 export const getFilter = createSelector(getAppState, (state) => state.filter);
+
+export const getAllIdeas = createSelector(getAppState, (state) => state.ideas);
+
+export const getUsersData = createSelector(getAllIdeas, (ideas) =>
+  ideas?.filter((idea) => !idea.feedback)
+);
+export const getUsersFeedback = createSelector(getAllIdeas, (ideas) =>
+  ideas?.filter((idea) => idea.feedback)
+);

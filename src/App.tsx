@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import { MapContainer, Navigation, Panel, Title } from "./components";
+import { AdminPage, MainPage } from "./pages";
 
 function App() {
   return (
@@ -9,14 +9,15 @@ function App() {
         path="/city-palimpsest/"
         element={
           <>
-            <div className="slide">
-              <div className="panel">
-                <Title />
-                <Navigation />
-                <Panel />
-              </div>
-              <MapContainer />
-            </div>
+            <MainPage />
+          </>
+        }
+      />
+      <Route
+        path="/city-palimpsest/admin/"
+        element={
+          <>
+            <AdminPage />
           </>
         }
       />

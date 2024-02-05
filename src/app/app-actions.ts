@@ -1,5 +1,7 @@
-import { createAction } from "@reduxjs/toolkit";
+import { createAction, createAsyncThunk } from "@reduxjs/toolkit";
 import { AppThunk } from "./app-types";
+import { request } from "../utils";
+import { API_URL } from "./app-constants";
 
 export const setSelectedFeature = createAction(
   `appState/setSelectedFeature`,
@@ -36,3 +38,29 @@ export const setFilter = createAction(
     payload,
   })
 );
+
+export const postIdea = createAsyncThunk(
+  `appState/postIdea`,
+  async (data: any) => {
+    return request(`${API_URL}/ideas`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        ...data,
+      }),
+    });
+  }
+);
+
+export const fetchIdeas = createAsyncThunk(`appState/getIdeas`, async () => {
+  return request(`${API_URL}/ideas`, {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+  });
+});

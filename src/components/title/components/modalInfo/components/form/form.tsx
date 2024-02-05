@@ -14,6 +14,8 @@ import { MiniMap } from "./components/mini-map.js";
 import { FormContext } from "./formContext.js";
 import { useState } from "react";
 import { RollbackOutlined } from "@ant-design/icons";
+import { postIdea } from "../../../../../../app/app-actions.ts";
+import { useAppDispatch } from "../../../../../../app/app-types.ts";
 
 interface IFormProps {
   setMode?: (value: "info" | "feedback") => void;
@@ -21,6 +23,8 @@ interface IFormProps {
 
 export const FormModule = ({ setMode }: IFormProps) => {
   const [form] = Form.useForm();
+  const dispatch = useAppDispatch();
+
   const [formMode, setFromMode] = useState<"data" | "feedback">("feedback");
 
   const success = () => {
@@ -30,9 +34,10 @@ export const FormModule = ({ setMode }: IFormProps) => {
     form.resetFields();
   };
 
-  const onFinish = () => {
-    success();
+  const onFinish = (values: any) => {
+    dispatch(postIdea({ ...values, coordinates })).then(() => success());
   };
+
   const [coordinates, setCoordinates] = useState<{ lng: number; lat: number }>({
     lat: 48.14,
     lng: 11.57,

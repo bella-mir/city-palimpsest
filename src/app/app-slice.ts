@@ -5,6 +5,8 @@ import {
   setShowInfo,
   setSelectedLayer,
   setFilter,
+  postIdea,
+  fetchIdeas,
 } from "./app-actions";
 
 const initialState: IAppState = {
@@ -33,5 +35,24 @@ export const appSlice = createSlice({
       ...state,
       filter: action.payload,
     }));
+    builder.addCase(postIdea.fulfilled, (state) => {
+      state.status = "success";
+    });
+    builder.addCase(postIdea.pending, (state) => {
+      state.status = "pending";
+    });
+    builder.addCase(postIdea.rejected, (state) => {
+      state.status = "error";
+    });
+    builder.addCase(fetchIdeas.fulfilled, (state, action) => {
+      state.ideas = action.payload.data;
+      state.status = "success";
+    });
+    builder.addCase(fetchIdeas.pending, (state) => {
+      state.status = "pending";
+    });
+    builder.addCase(fetchIdeas.rejected, (state) => {
+      state.status = "error";
+    });
   },
 });
