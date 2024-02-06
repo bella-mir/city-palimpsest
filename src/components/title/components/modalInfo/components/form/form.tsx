@@ -36,6 +36,7 @@ export const FormModule = ({ setMode }: IFormProps) => {
 
   const onFinish = (values: any) => {
     dispatch(postIdea({ ...values, coordinates })).then(() => success());
+    setMode && setMode("info");
   };
 
   const [coordinates, setCoordinates] = useState<{ lng: number; lat: number }>({

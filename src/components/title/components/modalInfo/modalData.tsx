@@ -28,8 +28,8 @@ export const ModalData = ({ onClose }: IModalInfoProps) => {
   };
 
   const onFinish = (values: any) => {
-    console.log("finish");
     dispatch(postIdea({ ...values, coordinates })).then(() => success());
+    onClose();
   };
 
   return (
