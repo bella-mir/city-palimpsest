@@ -6,6 +6,7 @@ import styles from "./modalInfo.module.scss";
 import { Button, Form, Input, InputNumber, Modal, Select } from "antd";
 import { useAppDispatch } from "../../../../app/app-types";
 import { postIdea } from "../../../../app/app-actions";
+import { Link } from "react-router-dom";
 
 interface IModalInfoProps {
   onClose: () => void;
@@ -113,6 +114,9 @@ export const ModalData = ({ onClose }: IModalInfoProps) => {
                   Share
                 </Button>
               </Form.Item>
+              <Link to="admin" className={styles.data}>
+                Others' suggestions
+              </Link>
             </div>
           </Form>
         </div>
