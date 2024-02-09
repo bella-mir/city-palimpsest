@@ -17,7 +17,6 @@ import {
   adminFillStyle,
   clusterCountLayer,
   clusterLayer,
-  // parksOutline,
 } from "./map-constants";
 import { Infowindow, Legend } from "./components";
 import { useAppDispatch } from "../../app/app-types";
@@ -148,10 +147,6 @@ export const MapContainer = () => {
                 {...visibleLayer.style}
                 filter={filter ? filter : [">", "Period", 0]}
               />
-              {/* <Layer
-                {...parksOutline}
-                filter={filter ? filter : [">", "Period", 0]}
-              /> */}
             </Source>
           </>
         )}
