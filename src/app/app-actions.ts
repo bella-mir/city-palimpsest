@@ -47,6 +47,8 @@ export const postIdea = createAsyncThunk(
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        referrerPolicy: "unsafe_url",
       },
       body: JSON.stringify({
         ...data,
@@ -60,7 +62,9 @@ export const fetchIdeas = createAsyncThunk(`appState/getIdeas`, async () => {
     method: "GET",
     headers: {
       Accept: "application/json",
+      "Access-Control-Allow-Origin": "*",
       "Content-Type": "application/json",
+      referrerPolicy: "unsafe_url",
     },
   });
 });
